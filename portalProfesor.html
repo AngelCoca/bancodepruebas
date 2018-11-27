@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Portal profesor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="recursos/estilos.css" />
+    <script src="recursos/validador.js"></script>
+    <script src="recursos/funciones.js"></script>
+    <link rel="shortcut icon" href="https://iesmarenostrum.net/moodle/theme/image.php/shoelace/theme/1508012975/favicon"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body onload="carga()"  id="cuerpo-portalProfesor">
+ 
+
+
+    <script>
+        var ventanaLogin;
+        
+       function eliminarAlumno(){
+
+           var identificador = document.getElementById("dni-Alumno").value;
+
+           botonBorrar(identificador);
+       }
+
+       function vaciarCajas(){
+        vaciarCaja("nombre-Alumno");
+        vaciarCaja("apellidos-Alumno");
+        vaciarCaja("email-Alumno");
+        vaciarCaja("dni-Alumno");
+
+        vaciarCaja("notaPrimerTriCaja");
+        vaciarCaja("notaSegundoTriCaja");
+        vaciarCaja("notaTercerTriCaja");
+
+
+       }
+
+        function nuevoAlumno(){
+
+            interaccionInputs(false, false);
+            vaciarCajas();
+
+            document.getElementById("formularioMostrarAlumno").style.display = 'block';
+            document.getElementById("boton-guardar-Alumno").disabled = false
+            document.getElementById("boton-editar-Alumno").style.display = 'none';
+            document.getElementById("boton-eliminar-alumno").style.display = 'none';
+            document.getElementById("divNotaMedia").style.display = 'none';
+
+            cargarNombresSelect()
+        
+        }
+      
+    function carga(){
+
+      //  document.getElementById("idPrueba").style.display = 'block'
+        ventanaLogin = window.open("inicio.html", "Login", "width=400, height=500, left=450, top=100, toolbar=yes, menubar=no, Directories=no");
+        comprobarIDProfesor();
+        document.getElementById("formularioMostrarAlumno").style.display = 'none';
+    }
+
+    function validarFormulario() {
+
+        var valido;
+        var nombreAlumno  = document.getElementById("nombre-Alumno").value;
+        var apellidosAlumno = document.getElementById("apellidos-Alumno").value;
+        var emailAlumno = document.getElementById("email-Alumno").value;
+        var dniAlumno = document.getElementById("dni-Alumno").value;
+        var cursoAlumno = document.getElementById("selecAsignatura").value;
+    
+         var notaPrimerTri = document.getElementById("notaPrimerTriCaja").value;
+         var notaSegunTri = document.getElementById("notaSegundoTriCaja").value;
+         var notaTercerTri  = document.getElementById("notaTercerTriCaja").value;
+
+         //Valores llenos
+         var nombreLleno = comprobarCampoLleno(nombreAlumno);
+         var apellidosAlumnoLleno = comprobarCampoLleno(apellidosAlumno);
+         var emailAlumnoLleno = comprobarCampoLleno(emailAlumno);
+         var dniAlumnoLleno = comprobarCampoLleno(dniAlumno);
+         var notaPrimerLlena = comprobarCampoLleno(notaPrimerTri);
+         var notaSegunLlena = comprobarCampoLleno(notaSegunTri);
+         var notaTercerLlena = comprobarCampoLleno(notaTercerTri);
+
+        if(nombreLleno && apellidosAlumnoLleno && emailAlumnoLleno && dniAlumnoLleno && notaPrimerLlena && notaSegunLlena && notaTercerLlena){
+
+        var datosValidos = comprobarDatosValidos(nombreAlumno, apellidosAlumno, emailAlumno, dniAlumno, notaPrimerTri, notaSegunTri, notaTercerTri);
+
+            if(datosValidos){
+                valido = true; 
+            } else {
+                valido = false;
+                alert("Los datos introducidos no son válidos");
+            }
+
+        } else {
+           alert("Existen cajas vacías. Deben estar rellenas");
+        }
+
+         return valido
+    }
+
+
+    function guardarAlumno(){
+        var nombreAlumno  = document.getElementById("nombre-Alumno").value;
+        var apellidosAlumno = document.getElementById("apellidos-Alumno").value;
+        var emailAlumno = document.getElementById("email-Alumno").value;
+        var dniAlumno = document.getElementById("dni-Alumno").value;
+        var cursoAlumno = document.getElementById("selecAsignatura").value;
+
+         var notaPrimerTri = document.getElementById("notaPrimerTriCaja").value;
+         var notaSegunTri = document.getElementById("notaSegundoTriCaja").value;
+         var notaTercerTri  = document.getElementById("notaTercerTriCaja").value;
+   
+        var datosValido = validarFormulario();
+        if(datosValido){            
+            guardaAlumno(nombreAlumno, apellidosAlumno, emailAlumno, dniAlumno, cursoAlumno, notaPrimerTri, notaSegunTri, notaTercerTri);
+        }
+        else {
+            //TODO      
+        }
+    }
+        
+    </script>
+
+
+
+    <!--Navegador-->
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+            <a class="navbar-brand" href="#">IES Mare Nostrum</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+            <li><a href="paginaInformacion.html" > <span class="glyphicon glyphicon-user" id="nombreUsuario-Nav"></span> </a></li>
+            </ul>
+        </div>
+    </nav>
+
+                   
+
+
+    <!--Contenido-->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <table class="table">
+                    <thead>
+                      <tr class="tablaHorario">
+                        <th  class="tablaHorario">Horario</th>
+                        <th  class="tablaHorario">Lunes</th>
+                        <th  class="tablaHorario">Martes</th>
+                        <th  class="tablaHorario">Miercoles</th>
+                        <th  class="tablaHorario">Jueves</th>
+                        <th  class="tablaHorario">Viernes</th>
+                      </tr>
+                    </thead>
+                    <tbody id="horarioProfesor">
+                    </tbody>
+                </table>
+            </div>
+        
+          <div class="col-sm-7 col-sm-offset-1">
+            <ul class="nav nav-tabs">
+           
+              <li><a onclick="monstrarAlumnos('todos')">Todos </a></li>
+              <li><a onclick="monstrarAlumnos('1DAW')">1DAW</a></li>
+              <li><a onclick="monstrarAlumnos('1ASIR')">1ASIR</a></li>
+              <li><a onclick="monstrarAlumnos('2DAW')">2DAW</a></li>
+              <li><a onclick="monstrarAlumnos('2ASIR')">2ASIR</a></li>
+              <li><button type="button" onclick="nuevoAlumno()" class="btn btn-info">Nuevo alumno</button></li>
+              <li class=" navbar-right"><input type="text" class="form-control" placeholder="Buscar..." id="input-buscarAlumno-tabla" onkeyup="filtarAlumnoTabla()"></li>
+              
+            </ul>
+
+            <div id="cuadro-AlumnosQueMostrar">
+                <table class="table table-condensed" name="tablaAlumnosFiltrar">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>DNI</th>
+                        <th>Curso</th>
+                        <th  class='text-center'>Eliminar</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tablaAlumnos">
+                    </tbody>
+                </table>
+            </div>
+          
+          </div>
+
+        </div>
+    </div>
+
+
+<!--Presetacion alumno-->
+    <div class="container" id="formularioMostrarAlumno">
+        <form class="form-horizontal">
+            <p id="mostrarErroresEnFormulario"></p>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="name">Nombre:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="nombre-Alumno" name="name">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="name">Apellidos:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="apellidos-Alumno" name="name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="email-Alumno" name="email">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="text">DNI:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="dni-Alumno" name="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Curso:</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="selecAsignatura" name="selecAsignatura">
+                            
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <label class="control-label col-sm-7" for="email">Primer Trimestre</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="notaPrimerTriCaja" name="name">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label class="control-label col-sm-7" for="email">Segundo Trimestre</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="notaSegundoTriCaja" name="name">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label class="control-label col-sm-7" for="email">Tercer  Trimestre:</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="notaTercerTriCaja" name="name">
+                    </div>
+                </div>
+                <div id="divNotaMedia" class="col-sm-3">
+                    <label class="control-label col-sm-7"  for="email">Nota media</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="notaMediaCaja" name="name">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-* text-right">
+                    <button type="button" id="boton-eliminar-alumno" onclick="eliminarAlumno()" class="btn btn-danger botonesInteractivosFormulario">Eliminar</button>               
+                    <button type="button" id="boton-guardar-Alumno" onclick="guardarAlumno()" class="btn btn-success botonesInteractivosFormulario">Guardar</button>
+                    <button type="button" id="boton-editar-Alumno" onclick="editarAlumno()" class="btn btn-primary botonesInteractivosFormulario">Editar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

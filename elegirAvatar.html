@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <script>
+         function avatarElegido(nombreImagen){
+             window.opener.document.getElementById("nuevaImagenAvatar").src = "recursos/imagenes/avatares/" + nombreImagen;
+             this.close()
+         }    
+        
+        
+    
+    </script>
+
+<div class="container">
+  <h2>Avatar</h2>
+  
+  <img src="recursos/imagenes/avatares/man1.png" onclick="avatarElegido('man1.png')" class="img-circle" alt="Cinque Terre" width="150" height="118"> 
+  <img src="recursos/imagenes/avatares/girl1.png" onclick="avatarElegido('girl1.png')" class="img-circle" alt="Cinque Terre" width="150" height="118"> 
+
+  <img src="recursos/imagenes/avatares/man2.png" onclick="avatarElegido('man2.png')" class="img-circle" alt="Cinque Terre" width="150" height="118"> 
+  <img src="recursos/imagenes/avatares/girl2.png" onclick="avatarElegido('girl2.png')" class="img-circle" alt="Cinque Terre" width="150" height="118"> 
+
+  <img src="recursos/imagenes/avatares/girl3.png" onclick="avatarElegido('girl3.png')" class="img-circle" alt="Cinque Terre" width="150" height="118"> 
+  <img src="recursos/imagenes/avatares/girl4.png" onclick="avatarElegido('girl4.png')" class="img-circle" alt="Cinque Terre" width="150" height="118"> 
+
+</div>
+
+</body>
+</html>

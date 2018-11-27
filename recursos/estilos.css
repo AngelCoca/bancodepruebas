@@ -1,0 +1,40 @@
+/* PÁGINA INDEX */
+.formulario-inicio{
+    padding: 20px 20px 20px 20px; 
+    background-color:#A9CCE3;
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+}
+.label-formulario-inicio{
+    text-align: left;
+    margin-left: 15px;
+
+}
+
+.input-formulario-inicio{
+    width: 90%;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.boton-formulario-inicio{
+    margin-top: 20px;
+}
+
+.caso-error-estilo{
+    color: red;
+}
+/* PÁGINA INDEX */
+
+.tablaHorario{
+    border: 1px solid black;
+}
+
+.botonesInteractivosFormulario {
+    float: right;; 
+    display:block;
+    margin-right: 1%;
+
+}
